@@ -1,20 +1,27 @@
 import React, { useCallback, useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import CounterItem from "../../component/counterItem";
-import { getCounterData, CounterData } from "../../lib/helpers/localStorage";
+import {
+  getCounterData,
+  counterData,
+  initialDataInLocalStorage,
+} from "../../lib/helpers/localStorage";
 
 import "./counter.css";
+
+//array
 const numberOfCounter = [1, 2, 3];
+
 function Counter() {
   const [counterItem, setCounterItem] = useState(getCounterData);
 
-  const increment = useCallback(
-    (id) => {
-      // debugger;
-      setCounterItem(() => {
+  //function
+  const increment = useCallback((id) => {
+      setCounterItem((counterItem) => {
         const incrementData = {
           ...counterItem,
           total:
-            counterItem.item[id].isActive === false
+            counterItem.item[id].count < 1
               ? counterItem.total + 1
               : counterItem.total,
           item: {
@@ -22,24 +29,21 @@ function Counter() {
             [id]: {
               ...counterItem.item.id,
               count: counterItem.item[id].count + 1,
-              isActive: counterItem.item[id].count + 1 >= 1 ? true : false,
             },
           },
         };
-        CounterData(incrementData);
+        counterData(incrementData);
         return incrementData;
       });
     },
     [counterItem]
   );
 
-  const decrement = useCallback(
-    (id) => {
-      setCounterItem(() => {
+  const decrement = useCallback((id) => {
+      setCounterItem((counterItem) => {
         const decrementDat = {
           ...counterItem,
           total:
-            counterItem.item[id].isActive === false ||
             counterItem.item[id].count === 1
               ? counterItem.total - 1
               : counterItem.total,
@@ -48,11 +52,10 @@ function Counter() {
             [id]: {
               ...counterItem.item.id,
               count: counterItem.item[id].count - 1,
-              isActive: counterItem.item[id].count - 1 <= 1 ? false : true,
             },
           },
         };
-        CounterData(decrementDat);
+        counterData(decrementDat);
         return decrementDat;
       });
     },
@@ -67,19 +70,16 @@ function Counter() {
           ...counterItem.item,
           1: {
             count: 0,
-            isActive: false,
           },
           2: {
             count: 0,
-            isActive: false,
           },
           3: {
             count: 0,
-            isActive: false,
           },
         },
       };
-      CounterData(ResetTheData);
+      counterData(ResetTheData);
       return ResetTheData;
     });
   }, [counterItem]);

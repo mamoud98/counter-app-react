@@ -3,15 +3,12 @@ export const initialData = {
   item: {
     1: {
       count: 0,
-      isActive: false,
     },
     2: {
       count: 0,
-      isActive: false,
     },
     3: {
       count: 0,
-      isActive: false,
     },
   },
 };

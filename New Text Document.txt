@@ -1,0 +1,40 @@
+component
+
+line
+props type
+arrow 
+seme colne line 27 component
+////
+css
+
+color hash 
+////
+
+loclStorge
+
+name CounterData => counterData
+key name 
+
+initial data wrap in function
+
+ascy await for getdata for save
+
+///
+pages
+
+debger remove
+
+test file
+numer of couner => new file 
+
+useCollback near id
+prev data
+
+
+
+
+
+
+
+
+ 
